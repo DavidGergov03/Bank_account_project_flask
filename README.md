@@ -26,9 +26,41 @@ A simple Flask-based banking application that allows users to:
 
 ---
 
-## Running the App Locally
+## Running the App Locally with Flask
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your_username/bank-account-app.git
+   git clone https://github.com/your_username/bank_account_project_flask.git
    cd bank-account-app
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Run the Flask app:
+   ```bash
+   flash run
+   ```
+5. Open your browser and navigate to:
+   ```arduino
+   http://localhost:5000
+   ```
+## Running the App with Docker
+
+1. Build the Docker image:
+   ```bash
+   docker build -t bank_account_app .
+   ```
+2. Run the Docker container:
+   ```bash
+   docker run -p 5000:5000 bank_account_app
+   ```
+3. Open your browser and navigate to:
+   ```arduino
+   http://localhost:5000
+   ```
