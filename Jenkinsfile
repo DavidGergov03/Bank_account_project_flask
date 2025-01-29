@@ -7,15 +7,11 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/DavidGergov03/Bank_account_project_flask.git'
             }
         }
-
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
-                sh 'echo Building the project...'
-                // Replace this with your actual build command, e.g., for Java:
-                // sh 'mvn package'
+                sh 'pip install -r requirements.txt'
             }
         }
-
         stage('Test') {
             steps {
                 sh 'echo Running tests...'
@@ -23,7 +19,12 @@ pipeline {
                 // sh 'pytest'
             }
         }
-
+        stage('Build Dcoker image') {
+            steps {
+                sh 'echo Building the project...'
+                sh 'docker build -t bank_account_app .'
+            }
+        }
         stage('Deploy') {
             steps {
                 sh 'echo Deploying application...'
