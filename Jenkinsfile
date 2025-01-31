@@ -7,6 +7,13 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/DavidGergov03/Bank_account_project_flask.git'
             }
         }
+        stage('Debug Python Path') {
+            steps {
+                sh 'which python3 || echo "Python3 not found"'
+                sh 'which pip || echo "pip not found"'
+                sh 'echo $PATH'
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 sh '/usr/bin/python3 -m pip install --upgrade pip'
