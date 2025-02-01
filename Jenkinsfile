@@ -7,19 +7,19 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/DavidGergov03/Bank_account_project_flask.git'
             }
         }
-        stage('Install Dependencies with pipx') {
+        stage('Setup Python Virtual Environment') {
             steps {
-                sh 'pipx install -r requirements.txt'
+                sh 'python3 -m venv venv'
+                sh 'source venv/bin/activate && pip install --upgrade pip'
+                sh 'source venv/bin/activate && pip install -r requirements.txt'
             }
         }
         stage('Test') {
             steps {
-                sh 'echo Running tests...'
-                // Replace this with actual test command, e.g., for Python:
-                // sh 'pytest'
+                sh 'source venv/bin/activate && echo Running tests...'
             }
         }
-        stage('Build Dcoker image') {
+        stage('Build Docker Image') {
             steps {
                 sh 'echo Building the project...'
                 sh 'docker build -t bank_account_app .'
@@ -28,7 +28,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'echo Deploying application...'
-                // Add deployment steps here (e.g., Docker, Kubernetes, SCP)
             }
         }
     }
