@@ -7,9 +7,9 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/DavidGergov03/Bank_account_project_flask.git'
             }
         }
-        stage('Install Dependencies') {
+        stage('Install Dependencies with pipx') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'pipx install -r requirements.txt'
             }
         }
         stage('Test') {
