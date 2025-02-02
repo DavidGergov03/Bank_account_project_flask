@@ -8,7 +8,6 @@ A simple Flask-based banking application that allows users to:
 - View account details after authentication.
 - Store session data for 30 minutes using Flask-Session.
 - Run the app in a Docker container for easy deployment.
-- Also has integrated a Jenkinsfile for CI/CD.
 
 ---
 
@@ -18,6 +17,7 @@ A simple Flask-based banking application that allows users to:
 - **Account Authentication**: Securely view account details using account number and password.
 - **Session Persistence**: Data persists for 30 minutes using Flask-Session.
 - **Docker Support**: Easily run the app using Docker.
+- **CI/CD Support**: Has an integrated Jenkinsfile to create a CI/CD pipeline for the project.
 
 ---
 
