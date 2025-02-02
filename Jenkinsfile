@@ -16,9 +16,9 @@ pipeline {
                 sh '. venv/bin/activate && pip install -r requirements.txt'
             }
         }
-        stage('Test') {
+        stage('Run unit tests') {
             steps {
-                sh '. venv/bin/activate && echo Running tests...'
+                sh '. venv/bin/activate && pytest tests/test_account.py --junitxml=unit-test-results.xml'
             }
         }
         stage('Build Docker Image') {
@@ -27,10 +27,39 @@ pipeline {
                 sh 'docker build -t bank_account_app .'
             }
         }
+        stage('Run container for testing') {
+            steps {
+                sh 'docker run -d -p 5000:5000 --name test-app bank_account_app'
+                sleep(time: 5, unit: "SECONDS")
+            }
+        }
+        stage('Run routes test') {
+            steps {
+                 sh '. venv/bin/activate && pytest tests/test_routes.py --junitxml=integration-test-results.xml'
+            }
+        }
+        stage('Stop and remove container') {
+            steps {
+                sh 'docker stop test-app && docker rm test-app'
+            }
+        }
+        stage('Publish test reports'){
+            steps {
+                junit '**/*-test-results.xml'
+            }
+        }
         stage('Deploy') {
             steps {
                 sh 'echo Deploying application...'
             }
+        }
+    }
+     post {
+        always {
+            echo "Pipeline completed!"
+        }
+        failure {
+            echo "Pipeline failed!"
         }
     }
 }
