@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Run container for testing') {
             steps {
-                sh 'docker run -d -p 5000:5000 --name test-app bank_account_app'
+                sh 'docker run -d -p 5001:5000 --name test-app bank_account_app'
                 sleep(time: 5, unit: "SECONDS")
             }
         }
