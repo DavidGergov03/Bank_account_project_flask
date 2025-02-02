@@ -55,7 +55,7 @@ pipeline {
             echo "Publishing test results"
             junit '**/*-test-results.xml'
         }
-        sucess {
+        success {
             echo "Pipeline completed successfully!"
         }
         failure {
