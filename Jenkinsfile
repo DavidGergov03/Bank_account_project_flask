@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Run unit tests') {
             steps {
-                sh '. venv/bin/activate && pytest tests/test_account.py --junitxml=unit-test-results.xml'
+                sh '. venv/bin/activate && pytest test/test_account.py --junitxml=unit-test-results.xml'
             }
         }
         stage('Build Docker Image') {
@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Run routes test') {
             steps {
-                 sh '. venv/bin/activate && pytest tests/test_routes.py --junitxml=integration-test-results.xml'
+                 sh '. venv/bin/activate && pytest test/test_routes.py --junitxml=integration-test-results.xml'
             }
         }
         stage('Stop and remove container') {
