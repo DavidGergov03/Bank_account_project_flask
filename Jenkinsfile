@@ -20,7 +20,7 @@ pipeline {
         stage('Run unit tests') {
             steps {
                 sh 'ls -R ${WORKSPACE}'
-                sh 'cd ${WORKSPACE} && . venv/bin/activate && PYTHONPATH=${WORKSPACE} pytest test/test_bank_account.py --junitxml=unit-test-results.xml'
+                sh 'cd ${WORKSPACE} && . venv/bin/activate && PYTHONPATH=${WORKSPACE} pytest test/test_account.py --junitxml=unit-test-results.xml'
             }
         }
         stage('Build Docker Image') {
