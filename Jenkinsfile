@@ -44,11 +44,6 @@ pipeline {
                 sh 'docker stop test-app-container && docker rm test-app'
             }
         }
-        stage('Publish test reports'){
-            steps {
-                junit '**/*-test-results.xml'
-            }
-        }
         stage('Deploy') {
             steps {
                 sh 'echo Deploying application...'
@@ -57,7 +52,11 @@ pipeline {
     }
      post {
         always {
-            echo "Pipeline completed!"
+            echo "Publishing test results"
+            junit '**/*-test-results.xml'
+        }
+        sucess {
+            echo "Pipeline completed successfully!"
         }
         failure {
             echo "Pipeline failed!"
