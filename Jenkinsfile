@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Run container for testing') {
             steps {
-                sh 'docker stop test-app-container && docker rm test-app'
+                sh 'docker stop test-app-container && docker rm test-app-container'
                 sh 'docker run -d -p 5001:5000 --name test-app-container bank_account_app'
                 sleep(time: 5, unit: "SECONDS")
             }
@@ -42,7 +42,7 @@ pipeline {
         }
         stage('Stop and remove container') {
             steps {
-                sh 'docker stop test-app-container && docker rm test-app'
+                sh 'docker stop test-app-container && docker rm test-app-container'
             }
         }
         stage('Deploy') {
