@@ -45,7 +45,7 @@ A simple Flask-based banking application that allows users to:
    ```
 4. Run the Flask app(The default port on which the app runs is 5000, if it is taken by another process, you can modify the command):
    ```bash
-   flask run / flask run --port 5001 (if port 5000 is taken)
+   flask run // flask run --port 5001 (if port 5000 is taken)
    ```
 5. Open your browser and navigate to:
    ```arduino
