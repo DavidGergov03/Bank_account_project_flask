@@ -45,7 +45,7 @@ A simple Flask-based banking application that allows users to:
    ```
 4. Run the Flask app:
    ```bash
-   flash run
+   flask run app.py
    ```
 5. Open your browser and navigate to:
    ```arduino
