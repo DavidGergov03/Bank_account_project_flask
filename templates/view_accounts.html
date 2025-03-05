@@ -1,26 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>View Accounts</title>
-</head>
-<body>
-	<h1>View Account</h1>
-	<form method="POST" autocomplete="off">
-    	<label for="account_number">Account Number:</label><br>
-    	<input type="text" id="account_number" name="account_number" required><br><br>
-    	<label for="password">Password:</label><br>
-    	<input type="password" id="password" name="password" required><br><br>
-    	<button type="submit">View Account</button>
-	</form>
+{% extends 'base.html' %}
 
-	{% if error %}
-		<p style="color:red;">{{ error }}</p>
-	{% endif %}
+{% block title %}View Accounts{% endblock %}
 
-	<form action="{{ url_for('index') }}" method="get">
-    	<button type="submit">Back to Main Menu</button>
-	</form>
-</body>
-</html>
+{% block content %}
+    <h1>View Account</h1>
+
+    <form method="POST" autocomplete="off">
+        <label for="account_number">Account Number:</label><br>
+        <input type="text" id="account_number" name="account_number" required><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit">View Account</button>
+    </form>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    <form action="{{ url_for('index') }}" method="get">
+        <button type="submit">Back to Main Menu</button>
+    </form>
+{% endblock %}

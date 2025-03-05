@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Account Details</title>
-</head>
-<body>
-	<h1>Account Details</h1>
-	<p>Account Number: {{ account.account_number }}</p>
-	<p>Account Type: {{ account.type }}</p>
-	<p>Balance: {{ account.balance }} BGN</p>
-	{% if account.type == 'Saving' %}
-		<p>Interest Rate: {{ account.interest_rate }}%</p>
-	{% endif %}
+{% extends 'base.html' %}
 
-	<form action="{{ url_for('index') }}" method="get">
-    	<button type="submit">Back to Main Menu</button>
-	</form>
-</body>
-</html>
+{% block title %}Account Details{% endblock %}
+
+{% block content %}
+    <h1>Account Details</h1>
+    <p>Account Number: {{ account.account_number }}</p>
+    <p>Account Type: {{ account.type }}</p>
+    <p>Balance: {{ account.balance }} BGN</p>
+
+    {% if account.type == 'Saving' %}
+        <p>Interest Rate: {{ account.interest_rate }}%</p>
+    {% endif %}
+
+    <form action="{{ url_for('index') }}" method="get">
+        <button type="submit">Back to Main Menu</button>
+    </form>
+{% endblock %}

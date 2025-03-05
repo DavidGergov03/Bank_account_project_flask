@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Main Menu</title>
-</head>
-<body>
-	<h1>Welcome to the Bank Application</h1>
-	<ul>
-		<li><a href="{{ url_for('current_account') }}">Create Current Account</a></li>
-		<li><a href="{{ url_for('savings_account') }}">Create Savings Account</a></li>
-		<li><a href="{{ url_for('view_accounts') }}">View Accounts</a></li>
-	</ul>
-	<form action="{{ url_for('exit_app') }}" method="post" style="margin-top: 20px;">
-	    <button type="submit">Exit</button>
-</body>
-</html>
+{% extends 'base.html' %}
 
+{% block title %}Main Menu{% endblock %}
+
+{% block content %}
+    <h1>Welcome to the Bank Application</h1>
+    <div class="menu-buttons">
+        <a href="{{ url_for('current_account') }}"><button>Create Current Account</button></a>
+        <a href="{{ url_for('savings_account') }}"><button>Create Savings Account</button></a>
+        <a href="{{ url_for('view_accounts') }}"><button>View Accounts</button></a>
+    </div>
+
+    <form action="{{ url_for('exit_app') }}" method="post" style="margin-top: 20px;">
+        <button type="submit">Exit</button>
+    </form>
+{% endblock %}
