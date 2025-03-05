@@ -31,7 +31,7 @@ A simple Flask-based banking application that allows users to:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your_username/bank_account_project_flask.git
+   git clone https://github.com/DavidGergov03/Bank_account_project_flask.git
    cd bank-account-app
    ```
 2. Create and activate a virtual environment:
