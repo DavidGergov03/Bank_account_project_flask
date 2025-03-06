@@ -13,8 +13,9 @@ app.secret_key = 'your_secret_key_here'
 
 Session(app)
 
+
 class BankAccount:
-    def __init__(self, account_number, balance=0, interest=0, password=''):
+    def __init__(self, account_number, balance=0.0, interest=0.0, password=''):
         self.account_number = account_number
         self.balance = balance
         self.interest = interest
@@ -24,7 +25,8 @@ class BankAccount:
         return {'type': 'Current', 'account_number': account_number, 'balance': balance, 'password': password}
 
     def savings_account(self, account_number, balance, interest, password):
-        return {'type': 'Saving', 'account_number': account_number, 'balance': balance, 'interest_rate': interest, 'password': password}
+        return {'type': 'Saving', 'account_number': account_number, 'balance': balance,
+                'interest_rate': interest, 'password': password}
 
 
 # Route for the Main Menu
@@ -50,7 +52,7 @@ def current_account():
         new_account = bank_acc_instance.currents_account(acc_num, balance, hashed_password)
         session['accounts'].append(new_account)  # Append to the accounts list
         session.modified = True  # Mark session as modified to ensure it's saved
-        return redirect(url_for('index'))
+        return render_template('current_account.html', acc_num=acc_num, balance=balance)
 
     return render_template('current_account.html')
 
@@ -70,10 +72,12 @@ def savings_account():
 
         # Create new savings account
         bank_acc_instance = BankAccount(acc_num_savings, balance_savings, interest_rate, password=hashed_password)
-        new_account = bank_acc_instance.savings_account(acc_num_savings, balance_savings, interest_rate, hashed_password)
+        new_account = bank_acc_instance.savings_account(acc_num_savings,
+                                                        balance_savings, interest_rate, hashed_password)
         session['accounts'].append(new_account)  # Append to the accounts list
         session.modified = True  # Mark session as modified to ensure it's saved
-        return redirect(url_for('index'))
+        return render_template('savings_account.html', acc_num_savings=acc_num_savings,
+                               balance_savings=balance_savings, interest_rate=interest_rate)
 
     return render_template('savings_account.html')
 
@@ -105,7 +109,7 @@ def exit_app():
     return render_template('goodbye.html')
 
 
-# Goodbye Page
+# ,Goodbye Page
 @app.route('/goodbye')
 def goodbye():
     return "<h1>Thank you for using our services. Goodbye!</h1>"
@@ -113,4 +117,3 @@ def goodbye():
 
 if __name__ == '__main__':
     app.run(debug=True)
-

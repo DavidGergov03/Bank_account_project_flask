@@ -2,15 +2,77 @@
 
 {% block title %}Main Menu{% endblock %}
 
+{% block breadcrumb %}
+    <a href="{{ url_for('index') }}">🏠 Home</a>
+{% endblock %}
+
 {% block content %}
     <h1>Welcome to the Bank Application</h1>
-    <div class="menu-buttons">
-        <a href="{{ url_for('current_account') }}"><button>Create Current Account</button></a>
-        <a href="{{ url_for('savings_account') }}"><button>Create Savings Account</button></a>
-        <a href="{{ url_for('view_accounts') }}"><button>View Accounts</button></a>
+    <p class="subtitle">Manage your accounts easily with the options below.</p>
+
+    <div class="menu-container">
+        <a href="{{ url_for('current_account') }}"><button class="menu-button">💳 Create Current Account</button></a>
+        <a href="{{ url_for('savings_account') }}"><button class="menu-button">💰 Create Savings Account</button></a>
+        <a href="{{ url_for('view_accounts') }}"><button class="menu-button">📜 View Accounts</button></a>
     </div>
 
-    <form action="{{ url_for('exit_app') }}" method="post" style="margin-top: 20px;">
-        <button type="submit">Exit</button>
-    </form>
+    <div class="button-container">
+        <form action="{{ url_for('exit_app') }}" method="post">
+            <button type="submit" class="exit-button">🚪 Exit</button>
+        </form>
+    </div>
+
+    <style>
+        .subtitle {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .menu-button {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 250px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .menu-button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .exit-button {
+            background-color: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 250px;
+        }
+
+        .exit-button:hover {
+            background-color: #c82333;
+        }
+    </style>
 {% endblock %}

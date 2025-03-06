@@ -5,36 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Site{% endblock %}</title>
     <style>
-        /* Ensure full-page flexbox centering */
-        html, body {
-            height: 100%;
-            margin: 0;
+        /* Navbar Styling */
+        .navbar {
+            background-color: #333;
+            padding: 10px 20px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+
+        .breadcrumb {
+            margin: 10px 20px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Centered content styling */
+        body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4; /* Optional: Light background for better visibility */
+            text-align: center;
         }
 
         .container {
-            text-align: center;
-            background: white;
+            margin-top: 20px;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 600px;
-            width: 100%;
         }
-        .menu-buttons a {
-            display: block;
-            margin: 10px 0;
+        .exit-nav-button {
+            background-color: darkred;
+            color: white;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .exit-nav-button:hover {
+            color: darkred;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        {% block content %}
-        {% endblock %}
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div>
+            <a href="{{ url_for('index') }}">🏠 Home</a>
+            <a href="{{ url_for('current_account') }}">💳 Current Account</a>
+            <a href="{{ url_for('savings_account') }}">💰 Savings Account</a>
+            <a href="{{ url_for('view_accounts') }}">📜 View Accounts</a>
+        </div>
+        <div>
+            <form action="{{ url_for('exit_app') }}" method="post" style="display: inline;">
+            <button type="submit" class="exit-nav-button">🚪 Exit</button>
+            </form>
+        </div>
     </div>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        {% block breadcrumb %}{% endblock %}
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
 </body>
 </html>

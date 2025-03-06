@@ -2,32 +2,102 @@
 
 {% block title %}Savings Account{% endblock %}
 
+{% block breadcrumb %}
+    <a href="{{ url_for('index') }}">🏠 Home</a> > 💰 Savings Account
+{% endblock %}
+
 {% block content %}
     <h1>Savings Account</h1>
 
-    <form method="POST" autocomplete="off">
-        <label for="account_number">Account Number:</label><br>
-        <input type="text" id="account_number" name="account_number" required><br>
+    <div class="form-container">
+        <form method="POST" autocomplete="off">
+            <label for="account_number">Account Number:</label>
+            <input type="text" id="account_number" name="account_number" required>
 
-        <label for="balance">Initial Balance:</label><br>
-        <input type="number" id="balance" name="balance" required><br><br>
+            <label for="balance">Initial Balance:</label>
+            <input type="number" id="balance" name="balance" required>
 
-        <label for="interest_rate">Interest Rate (%):</label><br>
-        <input type="number" id="interest_rate" name="interest_rate" required><br><br>
+            <label for="interest_rate">Interest Rate (%):</label>
+            <input type="number" id="interest_rate" name="interest_rate" required>
 
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
-        <button type="submit">Create Savings Account</button>
-    </form>
+            <button type="submit">Create Savings Account</button>
+        </form>
+    </div>
 
     {% if acc_num_savings %}
-        <h2>Account Number: {{ acc_num_savings }}</h2>
-        <h3>Balance: {{ balance_savings }} BGN</h3>
-        <h4>Interest Rate: {{ interest_rate }}%</h4>
+        <div class="account-summary">
+            <h2>Account Created Successfully! 🎉</h2>
+            <p><strong>Account Number:</strong> {{ acc_num_savings }}</p>
+            <p><strong>Balance:</strong> {{ balance_savings }} BGN</p>
+            <p><strong>Interest Rate:</strong> {{ interest_rate }}%</p>
+        </div>
     {% endif %}
 
-    <form action="{{ url_for('index') }}" method="get">
-        <button type="submit">Back to Main Menu</button>
-    </form>
+    <div class="button-container">
+        <form action="{{ url_for('index') }}" method="get">
+            <button type="submit" class="secondary-button">Back to Main Menu</button>
+        </form>
+    </div>
+
+    <style>
+        .form-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .secondary-button {
+            background-color: #6c757d;
+        }
+
+        .secondary-button:hover {
+            background-color: #5a6268;
+        }
+
+        .account-summary {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 20px auto;
+            text-align: center;
+        }
+    </style>
 {% endblock %}
