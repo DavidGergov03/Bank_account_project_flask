@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, session
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 app = Flask(__name__)
 
@@ -21,10 +21,12 @@ class BankAccount:
         self.interest = interest
         self.password = password
 
-    def currents_account(self, account_number, balance, password):
+    @staticmethod
+    def currents_account(account_number, balance, password):
         return {'type': 'Current', 'account_number': account_number, 'balance': balance, 'password': password}
 
-    def savings_account(self, account_number, balance, interest, password):
+    @staticmethod
+    def savings_account(account_number, balance, interest, password):
         return {'type': 'Saving', 'account_number': account_number, 'balance': balance,
                 'interest_rate': interest, 'password': password}
 
@@ -48,8 +50,7 @@ def current_account():
         hashed_password = generate_password_hash(password)  # Hashing the password for storage
 
         # Create new current account
-        bank_acc_instance = BankAccount(acc_num, balance, password=hashed_password)
-        new_account = bank_acc_instance.currents_account(acc_num, balance, hashed_password)
+        new_account = BankAccount.currents_account(acc_num, balance, hashed_password)
         session['accounts'].append(new_account)  # Append to the accounts list
         session.modified = True  # Mark session as modified to ensure it's saved
         return render_template('current_account.html', acc_num=acc_num, balance=balance)
@@ -71,9 +72,7 @@ def savings_account():
         hashed_password = generate_password_hash(password)  # Hashing the password for storage
 
         # Create new savings account
-        bank_acc_instance = BankAccount(acc_num_savings, balance_savings, interest_rate, password=hashed_password)
-        new_account = bank_acc_instance.savings_account(acc_num_savings,
-                                                        balance_savings, interest_rate, hashed_password)
+        new_account = BankAccount.savings_account(acc_num_savings, balance_savings, interest_rate, hashed_password)
         session['accounts'].append(new_account)  # Append to the accounts list
         session.modified = True  # Mark session as modified to ensure it's saved
         return render_template('savings_account.html', acc_num_savings=acc_num_savings,
@@ -106,6 +105,7 @@ def view_accounts():
 # Route for Exiting and Clearing the Session
 @app.route('/exit', methods=['POST'])
 def exit_app():
+    session.clear()
     return render_template('goodbye.html')
 
 
