@@ -49,6 +49,11 @@ def current_account():
         password = request.form['password']
         hashed_password = generate_password_hash(password)  # Hashing the password for storage
 
+        for account in session['accounts']:
+            if account['account_number'] == acc_num:
+                return render_template('current_account.html',
+                                       error="⚠️ This account number already exists.")
+
         # Create new current account
         new_account = BankAccount.currents_account(acc_num, balance, hashed_password)
         session['accounts'].append(new_account)  # Append to the accounts list
@@ -70,6 +75,11 @@ def savings_account():
         interest_rate = float(request.form['interest_rate'])
         password = request.form['password']
         hashed_password = generate_password_hash(password)  # Hashing the password for storage
+
+        for account in session['accounts']:
+            if account['account_number'] == acc_num_savings:
+                return render_template('savings_account.html',
+                                       error="⚠️ This account number already exists.")
 
         # Create new savings account
         new_account = BankAccount.savings_account(acc_num_savings, balance_savings, interest_rate, hashed_password)
@@ -105,7 +115,6 @@ def view_accounts():
 # Route for Exiting and Clearing the Session
 @app.route('/exit', methods=['POST'])
 def exit_app():
-    session.clear()
     return render_template('goodbye.html')
 
 

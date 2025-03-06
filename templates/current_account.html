@@ -9,6 +9,10 @@
 {% block content %}
     <h1>Current Account</h1>
 
+    {% if error %}
+    <p class="error-message">{{ error }}</p>
+    {% endif %}
+
     <div class="form-container">
         <form method="POST" autocomplete="off">
             <label for="account_number">Account Number:</label>
