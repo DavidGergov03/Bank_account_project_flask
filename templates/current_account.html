@@ -9,10 +9,6 @@
 {% block content %}
     <h1>Current Account</h1>
 
-    {% if error %}
-    <p class="error-message">{{ error }}</p>
-    {% endif %}
-
     <div class="form-container">
         <form method="POST" autocomplete="off">
             <label for="account_number">Account Number:</label>
@@ -30,7 +26,7 @@
 
     {% if acc_num %}
         <div class="account-summary">
-            <h2>Account Created Successfully!</h2>
+            <h2>Account Created Successfully! 🎉</h2>
             <p><strong>Account Number:</strong> {{ acc_num }}</p>
             <p><strong>Balance:</strong> {{ balance }} BGN</p>
         </div>
@@ -59,7 +55,7 @@
         }
 
         input {
-            width: 100%;
+            width: 95.5%;
             padding: 8px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
@@ -80,24 +76,6 @@
 
         button:hover {
             background-color: #0056b3;
-        }
-
-        .secondary-button {
-            background-color: #6c757d;
-        }
-
-        .secondary-button:hover {
-            background-color: #5a6268;
-        }
-
-        .account-summary {
-            background-color: #e3f2fd;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: 20px auto;
-            text-align: center;
         }
     </style>
 {% endblock %}

@@ -9,7 +9,7 @@
 {% block content %}
     <h1>Account Details</h1>
 
-    <div class="account-info">
+    <div class="account-summary">
         <p><strong>Account Number:</strong> {{ account.account_number }}</p>
         <p><strong>Account Type:</strong> {{ account.type }}</p>
         <p><strong>Balance:</strong> {{ account.balance }} BGN</p>
@@ -26,15 +26,6 @@
     </div>
 
     <style>
-        .account-info {
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: auto;
-        }
-
         .button-container {
             margin-top: 20px;
         }
