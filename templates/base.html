@@ -5,26 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Site{% endblock %}</title>
     <style>
-        /* Navbar Styling */
         .navbar {
-            background-color: #333;
-            padding: 10px 20px;
             display: flex;
-            border-radius: 12px;
-            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #333;
             align-items: center;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            font-size: 16px;
-        }
-
-        .navbar a:hover {
-            background-color: #555;
-            border-radius: 5px;
+            justify-content: space-between;
+            margin: 0;
         }
 
         .breadcrumb {
@@ -40,17 +27,17 @@
         .breadcrumb a:hover {
             text-decoration: underline;
         }
+
         body {
-            background: linear-gradient(to right, #141E30, #243B55) !important;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
             color: white;
+            background-color: #C4E1E6;
             font-family: Arial, sans-serif;
-            text-align: center;
         }
 
-        .container {
-            margin-top: 20px;
-            padding: 20px;
-        }
         .exit-nav-button {
             background-color: #dc3545;
             color: white;
@@ -64,13 +51,12 @@
         .exit-nav-button:hover {
             background-color: #c82333;
         }
+
         label {
-            background: linear-gradient(to right, #a8c0ff, #d9e4ff);
             padding: 5px;
-            border-radius: 5px;
             color: #333;
-            display: inline-block;
         }
+
         .secondary-button {
             background: linear-gradient(to right, #a8c0ff, #d9e4ff);
             color: black;
@@ -87,6 +73,7 @@
         .secondary-button:hover {
             background-color: #5a6268;
         }
+
         .account-summary {
             background: linear-gradient(to right, #a8c0ff, #d9e4ff);
             color: black;
@@ -97,29 +84,84 @@
             margin: 20px auto;
             text-align: center;
         }
+
+        ul {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            display: block;
+            position: relative;
+            padding: 0.2em 0;
+            text-decoration: none;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        a.active {
+            color: #EBFFD8;
+            font-weight: bold;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0.1em;
+            background-color: white;
+            opacity: 0;
+            transition: opacity 300ms, transform 300ms;
+        }
+
+        a:hover::after,
+        a:focus::after {
+            opacity: 1;
+            transform: translate3d(0, 0.2em, 0);
+        }
+
+        li a::after {
+            opacity: 1;
+            transform: scale(0);
+            transform-origin: center;
+            transition: transform 0.3s ease;
+        }
+
+        li a:hover::after,
+        li a:focus::after {
+            transform: scale(1);
+        }
     </style>
 </head>
 <body>
 
     <!-- Navigation Bar -->
     <div class="navbar">
-        <div>
-            <a href="{{ url_for('index') }}">🏠 Home</a>
-            <a href="{{ url_for('current_account') }}">💳 Current Account</a>
-            <a href="{{ url_for('savings_account') }}">💰 Savings Account</a>
-            <a href="{{ url_for('view_accounts') }}">📜 View Accounts</a>
-        </div>
-        <div>
-            <form action="{{ url_for('exit_app') }}" method="post" style="display: inline;">
-            <button type="submit" class="exit-nav-button">🚪 Exit</button>
-            </form>
-        </div>
+        <ul>
+            <li>
+                <a href="{{ url_for('index') }}" class="{{ 'active' if active_page == 'index' else '' }}">Account explorer</a>
+            </li>
+            <li>
+                <a href="{{ url_for('current_account') }}" class="{{ 'active' if active_page == 'account_manager' else '' }}">Account manager</a>
+            </li>
+        </ul>
+        <form action="{{ url_for('exit_app') }}" method="post" style="display: inline;">
+            <button type="submit" class="exit-nav-button">Log out</button>
+        </form>
     </div>
 
     <!-- Breadcrumb Navigation -->
-    <div class="breadcrumb">
+    <!-- <div class="breadcrumb">
         {% block breadcrumb %}{% endblock %}
-    </div>
+    </div> -->
 
     <!-- Main Content Container -->
     <div class="container">

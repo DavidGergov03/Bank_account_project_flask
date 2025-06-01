@@ -34,7 +34,7 @@ class BankAccount:
 # Route for the Main Menu
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', active_page='index')
 
 
 # Route for Current Account Creation
@@ -60,7 +60,7 @@ def current_account():
         session.modified = True  # Mark session as modified to ensure it's saved
         return render_template('current_account.html', acc_num=acc_num, balance=balance)
 
-    return render_template('current_account.html')
+    return render_template('account_manager.html', active_page='account_manager')
 
 
 # Route for Savings Account Creation
@@ -92,7 +92,7 @@ def savings_account():
 
 
 # Route for Viewing Accounts (Requires Account Number and Password)
-@app.route('/view_accounts', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def view_accounts():
     if request.method == 'POST':
         acc_num = request.form['account_number']
@@ -107,9 +107,9 @@ def view_accounts():
                     return render_template('account_details.html', account=account)
 
         # If no matching account or incorrect password
-        return render_template('view_accounts.html', error="Incorrect account number or password")
+        return render_template('index.html', error="Incorrect account number or password")
 
-    return render_template('view_accounts.html')
+    return render_template('index.html', active_page='index')
 
 
 # Route for Exiting and Clearing the Session
@@ -123,6 +123,10 @@ def exit_app():
 def goodbye():
     return "<h1>Thank you for using our services. Goodbye!</h1>"
 
+@app.route('/')
+def home():
+    return "Docker is working!"
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
