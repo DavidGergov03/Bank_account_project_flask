@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Site{% endblock %}</title>
     <style>
+        button {
+            margin-top: 10px;
+            background-color: #8DBCC7;
+            color: #333;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #A4CCD9;
+        }
+        .form-container {
+            background-color: white;
+            color: black;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            max-height: fit-content;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        .form-container h1 {
+            margin: 0;
+            padding: 0 0 15px 0;
+        }
         .navbar {
             display: flex;
             padding: 10px 20px;
@@ -12,20 +46,8 @@
             align-items: center;
             justify-content: space-between;
             margin: 0;
-        }
-
-        .breadcrumb {
-            margin: 10px 20px;
-            font-size: 14px;
-        }
-
-        .breadcrumb a {
-            text-decoration: none;
-            color: #007BFF;
-        }
-
-        .breadcrumb a:hover {
-            text-decoration: underline;
+            position: relative;
+            z-index: 1000;
         }
 
         body {
@@ -57,32 +79,21 @@
             color: #333;
         }
 
-        .secondary-button {
-            background: linear-gradient(to right, #a8c0ff, #d9e4ff);
-            color: black;
-            width: auto;
-            padding: 10px 20px;
-            margin-bottom: 20px;
-            margin-top: 20px;
-            border-radius: 25px; /* Oval edges */
-            display: inline-block;
-            text-align: center;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .secondary-button:hover {
-            background-color: #5a6268;
-        }
-
         .account-summary {
-            background: linear-gradient(to right, #a8c0ff, #d9e4ff);
-            color: black;
+            background: #8DBCC7;
+            color: white;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             margin: 20px auto;
             text-align: center;
+        }
+
+        .account-summary a {
+            color: #333;
+            background-color: white;
+            border-radius: 20px;
         }
 
         ul {
@@ -150,18 +161,13 @@
                 <a href="{{ url_for('index') }}" class="{{ 'active' if active_page == 'index' else '' }}">Account explorer</a>
             </li>
             <li>
-                <a href="{{ url_for('current_account') }}" class="{{ 'active' if active_page == 'account_manager' else '' }}">Account manager</a>
+                <a href="{{ url_for('account_manager') }}" class="{{ 'active' if active_page == 'current' or active_page == 'savings'  else '' }}">Account manager</a>
             </li>
         </ul>
         <form action="{{ url_for('exit_app') }}" method="post" style="display: inline;">
-            <button type="submit" class="exit-nav-button">Log out</button>
+            <button type="submit" class="exit-nav-button">Clear session</button>
         </form>
     </div>
-
-    <!-- Breadcrumb Navigation -->
-    <!-- <div class="breadcrumb">
-        {% block breadcrumb %}{% endblock %}
-    </div> -->
 
     <!-- Main Content Container -->
     <div class="container">

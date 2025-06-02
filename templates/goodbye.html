@@ -3,20 +3,55 @@
 {% block title %}Goodbye{% endblock %}
 
 {% block breadcrumb %}
-    <a href="{{ url_for('index') }}">🏠 Home</a> > 👋 Goodbye
+    <a href="{{ url_for('index') }}">🏠 Home</a> >Goodbye
 {% endblock %}
 
 {% block content %}
     <div class="goodbye-container">
-        <h1>Thank You for Using Our Services! 👋</h1>
+        <h1>Thank You for Using Our Services!</h1>
         <p>We appreciate your trust and hope to see you again soon.</p>
 
         <a href="{{ url_for('index') }}">
-            <button>🏠 Go Back to Home Page</button>
+            <button>Go Back to Home Page</button>
         </a>
     </div>
 
+    </style>
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p class="contact-text"><strong>Email:</strong> contact@example.com</p>
+        <p class="contact-text"><strong>Phone:</strong> +1 (555) 123-4567</p>
+        <p class="contact-text"><strong>Address:</strong> 123 Main St, Sofia, Bulgaria</p>
+    </div>
+
     <style>
+
+        .contact-section {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-section h2 {
+            margin-bottom: 15px;
+            color: black;
+        }
+
+        .contact-section p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .contact-text {
+            color: #000;
+        }
+
         .goodbye-container {
             background-color: #f8d7da;
             color: #721c24;
@@ -24,7 +59,7 @@
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 400px;
-            margin: auto;
+            margin: 20px auto;
             text-align: center;
         }
 

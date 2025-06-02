@@ -1,61 +1,48 @@
-{% extends 'base.html' %}
+{% extends 'account_manager.html' %}
 
 {% block title %}Savings Account{% endblock %}
 
-{% block breadcrumb %}
-    <a href="{{ url_for('index') }}">🏠 Home</a> > 💰 Savings Account
-{% endblock %}
-
-{% block content %}
-    <h1>Savings Account</h1>
-
-    {% if error %}
-    <p class="error-message">{{ error }}</p>
-    {% endif %}
-
-    <div class="form-container">
-        <form method="POST" autocomplete="off">
-            <label for="account_number">Account Number:</label>
-            <input type="text" id="account_number" name="account_number" required>
-
-            <label for="balance">Initial Balance:</label>
-            <input type="number" id="balance" name="balance" required>
-
-            <label for="interest_rate">Interest Rate (%):</label>
-            <input type="number" id="interest_rate" name="interest_rate" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">Create Savings Account</button>
-        </form>
-    </div>
-
-    {% if acc_num_savings %}
+{% block inner_content %}
+    {% if account_created and not error %}
         <div class="account-summary">
-            <h2>Account Created Successfully! 🎉</h2>
+            <h2>Account Created Successfully!</h2>
             <p><strong>Account Number:</strong> {{ acc_num_savings }}</p>
             <p><strong>Balance:</strong> {{ balance_savings }} BGN</p>
             <p><strong>Interest Rate:</strong> {{ interest_rate }}%</p>
         </div>
+    {% else %}
+
+        {% if error %}
+            <div class="account-summary">
+                <p class="error-message">{{ error }}</p>
+                <a href="{{ url_for('savings_account') }}">Create new savings account</a>
+            </div>
+        {% endif %}
+
+        {% if not error %}
+            <div class="form-container">
+                <form method="POST" autocomplete="off">
+                    <h1>Savings Account</h1>
+
+                    <label for="account_number">Account Number:</label>
+                    <input type="text" id="account_number" name="account_number" required>
+
+                    <label for="balance">Initial Balance:</label>
+                    <input type="number" id="balance" name="balance" required>
+
+                    <label for="interest_rate">Interest Rate (%):</label>
+                    <input type="number" id="interest_rate" name="interest_rate" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <button type="submit">Create Savings Account</button>
+                </form>
+            </div>
+        {% endif %}
     {% endif %}
 
-    <div class="button-container">
-        <form action="{{ url_for('index') }}" method="get">
-            <button type="submit" class="secondary-button">Back to Main Menu</button>
-        </form>
-    </div>
-
     <style>
-        .form-container {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: auto;
-        }
-
         label {
             font-weight: bold;
             display: block;
@@ -71,23 +58,8 @@
             font-size: 14px;
         }
 
-        button {
-            background-color: #007BFF;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
         .account-summary {
-            background-color: #e3f2fd;
+            background-color: #8DBCC7;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
