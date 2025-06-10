@@ -1,0 +1,9 @@
+version: 2
+authtoken: {your_auth_token_here}
+
+tunnels:
+  flask:
+    proto: http
+    addr: nginx:80
+    basic_auth:
+      - {username:password}

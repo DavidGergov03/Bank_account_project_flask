@@ -10,8 +10,8 @@ COPY . /app
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port Flask runs on
-EXPOSE 5000
+# Expose the port that Gunicorn will run on
+EXPOSE 8000
 
-# Run the Flask application
-CMD ["python3", "app.py"]
+# Run the application with Gunicorn
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:app"]

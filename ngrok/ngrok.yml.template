@@ -1,0 +1,9 @@
+version: 2
+authtoken: ${NGROK_AUTHTOKEN}
+
+tunnels:
+  flask:
+    proto: http
+    addr: nginx:80
+    basic_auth:
+      - ${NGROK_USERNAME_AUTH}:${NGROK_PASSWORD_AUTH}
